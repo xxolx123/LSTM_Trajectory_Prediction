@@ -55,7 +55,12 @@ def create_dataset(df, look_back=20, pred_len=5):
 
 
 def load_data(data_size=None, look_back=20, pred_len=5):
-    df = pd.read_csv("../Generated_Synthetic_Trajectories.csv")
+    # 这个是多种轨迹的
+    # df = pd.read_csv("../Generated_Synthetic_Trajectories.csv")
+
+    # 这个是只有s 曲线
+    df = pd.read_csv("../50_S_Curve.csv")
+
     if data_size:
         df = df.iloc[:data_size]
 
