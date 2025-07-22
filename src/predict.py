@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from keras.models import load_model
+# import data_absolute as dt
 import data as dt
 import matplotlib.pyplot as plt
 
@@ -8,7 +9,7 @@ if __name__ == '__main__':
     look_back = 20
     pred_len = 5
     train_x, train_y, test_x, test_y_true = dt.load_data(data_size=1500, look_back=look_back, pred_len=pred_len)
-    model = load_model("model_new/eps_100_bs_16_dp_0.2(256).h5")
+    model = load_model("model_new/eps_250_bs_16_dp_0.2(256).h5")
 
     # 模型预测
     # 自动推断 pred_len
@@ -19,7 +20,18 @@ if __name__ == '__main__':
     test_y = test_y.reshape(-1, pred_len, 2)  # Δx, Δy
     test_y_true = test_y_true.reshape(-1, pred_len, 2)
     last_point = test_x[:, -1, 1:3]
+
+
+    # TODO
+    # 这个是data版的
     pred_absolute = last_point[:, np.newaxis, :] + np.cumsum(test_y, axis=1)
+
+    # data absolute版本的
+    # pred_absolute = test_y.reshape(-1, pred_len, 2)
+    # gt_absolute = test_y_true.reshape(-1, pred_len, 2)
+
+
+
     gt_absolute = last_point[:, np.newaxis, :] + np.cumsum(test_y_true, axis=1)
 
     test_x_seq = test_x  # (N, 20, 3)

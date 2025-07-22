@@ -5,8 +5,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from keras.models import Sequential, load_model
 from keras.layers import Flatten, Dense, Embedding, LSTM, Dropout, Activation
+# import data_absolute as dt
 import data as dt
-
 
 def train_model(train_x, train_y, epochs, batch_size, dropout=0.2):
     """
@@ -53,11 +53,11 @@ if __name__ == '__main__':
     # train_x.shape(280, 10, 2)
     print(train_y.shape)
 
-    epochs = 100
+    epochs = 250
     batch_size = 16
     dropout = 0.2  # 0.05
     model = train_model(train_x, train_y, epochs, batch_size, dropout)
-    model_name = "D:/Pycharm_project/LSTM_Trajectory_Prediction-main/src/model_new/eps_" + str(epochs) + "_bs_" + str(batch_size) + "_dp_" + str(dropout) + "(256).h5"
+    model_name = "D:/Pycharm_project/LSTM_Trajectory_Prediction/src/model_new/eps_" + str(epochs) + "_bs_" + str(batch_size) + "_dp_" + str(dropout) + "(256).h5"
     model.save(model_name)
     print("模型已保存到：", os.path.abspath(model_name))
 
